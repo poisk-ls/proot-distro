@@ -61,9 +61,10 @@ There is a number of issues that are not resolved.
 
 With package manager:
 
+- pkg update
 - pkg install proot-distro
 - pkg install git
-- git clone https://github.com/poisk-ls/proot-distro
+- git clone https://github.com/poisk-ls/proot-distro.git
 - cd proot-distro
 - ./install.sh
 
@@ -86,9 +87,7 @@ Where `<command>` is a proot-distro action command (see below to learn what
 is available) and `<arguments>` is a list of options specific to given command.
 
 Example of installing the distribution:
-```
-proot-distro install debian
-```
+- proot-distro install debian
 
 Known distributions are defined through plug-in scripts, which define URLs
 from where root file system archive will be downloaded and set of checksums
@@ -119,10 +118,9 @@ to GZip compression and `.tar.xz` will lead to XZ. Piped backup data is always
 not compressed giving user freedom for further processing.
 
 Usage example:
-```
-proot-distro backup debian | xz | ssh example.com 'cat > /backups/pd-debian-backup.tar.xz'
-proot-distro backup --output backup.tar.gz debian
-```
+- proot-distro backup debian | xz | ssh example.com 'cat > /backups/pd-debian-backup.tar.xz'
+- proot-distro backup --output backup.tar.gz debian
+
 
 *This command is generic. All additional processing like encryption should be
 done by user through external commands.*
@@ -135,9 +133,7 @@ Install a distribution specified by alias - a short name referring to the
 plug-in of chosen distribution.
 
 Usage example:
-```
-proot-distro install alpine
-```
+- proot-distro install alpine
 
 By default the installed distribution will have same alias as specified on
 command line. This means you will be unable to install multiple copies at
@@ -145,10 +141,9 @@ same time. You can rename distribution during installation time by using
 option `--override-alias` which will create a copy of distribution plug-in.
 
 Usage example:
-```
-proot-distro install --override-alias alpine-test alpine
-proot-distro login alpine-test
-```
+- proot-distro install --override-alias alpine-test alpine
+- proot-distro login alpine-test
+
 
 Copied plug-in has following name format `<name>.override.sh` and is stored
 in directory with others (`$PREFIX/etc/proot-distro`).
@@ -165,19 +160,16 @@ and comments.
 Command: `login`
 
 Execute a shell within the given distribution. Example:
-```
-proot-distro login debian
-```
+
+- proot-distro login debian
 
 Execute a shell as specified user in the given distribution:
-```
-proot-distro login --user admin debian
-```
+- proot-distro login --user admin debian
 
 You can run a custom command as well:
-```
-proot-distro login debian -- /usr/local/bin/mycommand --sample-option1
-```
+
+- proot-distro login debian -- /usr/local/bin/mycommand --sample-option1
+
 
 Argument `--` acts as terminator of `proot-distro login` options processing.
 All arguments behind it would not be treated as options of PRoot Distro.
@@ -255,23 +247,23 @@ This command completely deletes the installation of given system. Be careful
 as it does not ask for confirmation. Deleted data is irrecoverably lost.
 
 Usage example:
-```
-proot-distro remove debian
-```
+- proot-distro remove debian
+
+
 
 ### Reinstall distribution
 
 Command: `reset`
 
 Delete the specified distribution and install it again. This is a shortcut for
-```
-proot-distro remove <dist> && proot-distro install <dist>
-```
+
+- proot-distro remove <dist> && proot-distro install <dist>
+
 
 Usage example:
-```
-proot-distro reset debian
-```
+
+- proot-distro reset debian
+
 
 Same as with command `remove`, deleted data is lost irrecoverably. Be careful.
 
@@ -288,10 +280,9 @@ Compression is determined automatically from file extension. Piped data
 must be always uncompressed before being supplied to `proot-distro`.
 
 Usage example:
-```
-ssh example.com 'cat /backups/pd-debian-backup.tar.xz' | xz -d | proot-distro restore
-proot-distro restore ./pd-debian-backup.tar.xz
-```
+
+- ssh example.com 'cat /backups/pd-debian-backup.tar.xz' | xz -d | proot-distro restore
+- proot-distro restore ./pd-debian-backup.tar.xz
 
 ### Clear downloads cache
 
