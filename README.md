@@ -66,7 +66,7 @@ With package manager:
 - pkg install git
 - git clone https://github.com/poisk-ls/proot-distro.git
 - cd proot-distro
-- ./install.sh
+- ./install.sh OR bash install.sh
 
 
 Dependencies: bash, bzip2, coreutils, curl, findutils, gzip, ncurses-utils,
